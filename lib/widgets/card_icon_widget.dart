@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:inventory_management_app/apptheme.dart';
 
-Widget cardIconWidget(BuildContext context) {
+Widget cardIconWidget(BuildContext context, itemCount) {
   return Stack(
     children: [
       const Padding(
@@ -24,9 +24,9 @@ Widget cardIconWidget(BuildContext context) {
             color: Colors.redAccent,
             shape: BoxShape.circle,
           ),
-          child: const Text(
-            "0",
-            style: TextStyle(
+          child: Text(
+            "$itemCount",
+            style: const TextStyle(
               color: Apptheme.light,
               fontWeight: FontWeight.bold,
               fontSize: 10.0,

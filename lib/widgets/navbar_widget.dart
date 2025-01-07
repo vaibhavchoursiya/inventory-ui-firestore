@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/widgets/card_icon_widget.dart';
+import 'package:inventory_management_app/providers/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class NavBarWidget extends StatelessWidget {
   const NavBarWidget({
@@ -11,6 +13,8 @@ class NavBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final itemCount =
+        context.select<HomeProvider, int>((provider) => provider.itemCount);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -50,7 +54,7 @@ class NavBarWidget extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {},
-          icon: cardIconWidget(context),
+          icon: cardIconWidget(context, itemCount),
         ),
       ],
     );
