@@ -14,7 +14,7 @@ class NavBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final itemCount =
-        context.select<HomeProvider, int>((provider) => provider.itemCount);
+        context.select<CartProvider, int>((provider) => provider.itemCount);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
