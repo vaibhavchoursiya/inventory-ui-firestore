@@ -3,7 +3,7 @@ import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/widgets/hero_section.dart';
 import 'package:inventory_management_app/widgets/label_header_widget.dart';
 import 'package:inventory_management_app/widgets/navbar_widget.dart';
-import 'package:inventory_management_app/widgets/product_grid.dart';
+import 'package:inventory_management_app/widgets/product_view.dart';
 import 'package:inventory_management_app/widgets/search_filter_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                   label: "Featured Products",
                   function: () {},
                 ),
-                ProductGrid()
+                ProductView()
               ],
             ),
           ),
