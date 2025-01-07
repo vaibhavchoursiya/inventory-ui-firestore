@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management_app/providers/cart_provider.dart';
+import 'package:inventory_management_app/providers/home_provider.dart';
 import 'package:inventory_management_app/routes.dart';
 import 'package:provider/provider.dart';
 
