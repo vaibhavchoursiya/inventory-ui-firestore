@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_management_app/models/product_model.dart';
 import 'package:inventory_management_app/services/firebase_firestore_service.dart';
 
 class AddProductProvider extends ChangeNotifier {
