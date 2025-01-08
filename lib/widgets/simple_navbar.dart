@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
+import 'package:inventory_management_app/providers/cart_provider.dart';
+import 'package:inventory_management_app/widgets/product_view.dart';
+import 'package:provider/provider.dart';
 
 class SimpleNavBar extends StatelessWidget {
   const SimpleNavBar({
@@ -18,6 +21,7 @@ class SimpleNavBar extends StatelessWidget {
         IconButton(
           onPressed: () {
             if (!initialLoader) {
+              context.read<CartProvider>().resetProvider();
               context.pop();
             }
           },
