@@ -52,4 +52,9 @@ class FirebaseFirestoreService {
       debugPrint(e.toString());
     }
   }
+
+  static Stream<QuerySnapshot> orderStream() {
+    final snapshot = orders.snapshots();
+    return snapshot;
+  }
 }
