@@ -46,6 +46,15 @@ class HomeProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  removeAddToCarts() {
+    for (var id in addToCartList) {
+      final productIndex = getProductIndex(id);
+      productList[productIndex].isAddToCart = false;
+    }
+    resetAddToCartList();
+    notifyListeners();
+  }
+
   resetAddToCartList() {
     addToCartList.clear();
     addToCartListLength = 0;
