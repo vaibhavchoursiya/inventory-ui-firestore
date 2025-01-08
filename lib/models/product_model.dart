@@ -23,9 +23,9 @@ class ProductModel {
     };
   }
 
-  factory ProductModel.fromJson(Map model) {
+  factory ProductModel.fromJson(Map model, String id) {
     return ProductModel(
-        id: model["id"],
+        id: id,
         name: model["name"],
         description: model["description"],
         totalQuantity: model["totalQuantity"],

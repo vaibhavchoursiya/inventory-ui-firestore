@@ -13,8 +13,8 @@ class NavBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final itemCount =
-        context.select<HomeProvider, int>((provider) => provider.itemCount);
+    final addToCartListLength = context
+        .select<HomeProvider, int>((provider) => provider.addToCartListLength);
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -54,7 +54,7 @@ class NavBarWidget extends StatelessWidget {
         ),
         IconButton(
           onPressed: () {},
-          icon: cardIconWidget(context, itemCount),
+          icon: cardIconWidget(context, addToCartListLength),
         ),
       ],
     );

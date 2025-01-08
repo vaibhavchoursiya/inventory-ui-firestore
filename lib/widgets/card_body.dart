@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
+import 'package:inventory_management_app/models/product_model.dart';
+import 'package:inventory_management_app/providers/home_provider.dart';
+import 'package:inventory_management_app/widgets/product_view.dart';
+import 'package:provider/provider.dart';
 
 class CardBody extends StatelessWidget {
+  final ProductModel productModel;
   const CardBody({
     super.key,
+    required this.productModel,
   });
 
   @override
@@ -19,7 +25,7 @@ class CardBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Katyayani activated humic acid + Fulvic acid",
+            productModel.name,
             style: GoogleFonts.roboto(
               color: Apptheme.dark.withOpacity(0.8),
               fontSize: 18.0,
@@ -30,7 +36,7 @@ class CardBody extends StatelessWidget {
             height: 10.0,
           ),
           Text(
-            "It acts as a natural Chelator (by providing a high cationic exchange capacity) to improve the uptake of minerals, nutrients, and trace elements by plants Direction of use Field-tested on Crops such as Rice, wheat, sugarcane, orchards, cotton chilies, banana, soybean, groundnut, vegetables, fruits,",
+            productModel.description,
             style: GoogleFonts.roboto(),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -40,12 +46,12 @@ class CardBody extends StatelessWidget {
           ),
           Row(
             children: [
-              const Chip(
-                color:
-                    WidgetStatePropertyAll(Color.fromARGB(255, 67, 224, 138)),
+              Chip(
+                color: const WidgetStatePropertyAll(
+                    Color.fromARGB(255, 67, 224, 138)),
                 label: Text(
-                  "₹3000.0",
-                  style: TextStyle(
+                  "₹${productModel.price}",
+                  style: const TextStyle(
                     color: Apptheme.light,
                   ),
                 ),
@@ -56,19 +62,29 @@ class CardBody extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   child: ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.read<HomeProvider>().addToCart(productModel.id);
+                    },
                     label: Text(
-                      "add to cart",
+                      productModel.isAddToCart
+                          ? "added to cart"
+                          : "add to cart",
                       style: GoogleFonts.aDLaMDisplay(),
                     ),
                     icon: const Icon(FontAwesomeIcons.cartShopping),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Apptheme.light,
-                      foregroundColor: Apptheme.dark,
-                      side: const BorderSide(
-                        color: Apptheme.dark,
-                        width: 0.8,
-                      ),
+                      backgroundColor: productModel.isAddToCart
+                          ? Apptheme.primary
+                          : Apptheme.light,
+                      foregroundColor: productModel.isAddToCart
+                          ? Apptheme.light
+                          : Apptheme.dark,
+                      side: productModel.isAddToCart
+                          ? null
+                          : const BorderSide(
+                              color: Apptheme.dark,
+                              width: 0.8,
+                            ),
                     ),
                   ),
                 ),
