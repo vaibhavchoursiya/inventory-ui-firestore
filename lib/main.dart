@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_management_app/firebase_options.dart';
+import 'package:inventory_management_app/providers/cart_provider.dart';
 import 'package:inventory_management_app/providers/home_provider.dart';
 import 'package:inventory_management_app/routes.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => HomeProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
         ),
       ],
       child: MaterialApp.router(

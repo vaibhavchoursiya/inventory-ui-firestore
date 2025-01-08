@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/models/product_model.dart';
 import 'package:inventory_management_app/providers/home_provider.dart';
-import 'package:inventory_management_app/widgets/product_view.dart';
 import 'package:provider/provider.dart';
 
 class CardBody extends StatelessWidget {

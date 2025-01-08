@@ -45,4 +45,18 @@ class HomeProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  resetAddToCartList() {
+    addToCartList.clear();
+    addToCartListLength = 0;
+  }
+
+  resetProductList() {
+    productList.clear();
+  }
+
+  resetProvider() {
+    resetAddToCartList();
+    resetProductList();
+  }
 }
