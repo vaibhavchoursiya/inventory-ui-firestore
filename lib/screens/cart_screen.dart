@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/providers/cart_provider.dart';
+import 'package:inventory_management_app/widgets/cart_view.dart';
 import 'package:inventory_management_app/widgets/navbar_widget.dart';
 import 'package:inventory_management_app/widgets/simple_navbar.dart';
 import 'package:provider/provider.dart';
@@ -78,6 +79,9 @@ class _CartScreenState extends State<CartScreen> {
                   child: Column(
                     children: [
                       SimpleNavBar(initialLoader: initialLoader),
+                      Expanded(
+                        child: CartView(),
+                      )
                     ],
                   ),
                 ),

@@ -15,7 +15,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(18.0),
+      padding: const EdgeInsets.all(18.0),
       child: Card(
         elevation: 2.0,
         color: Apptheme.light,

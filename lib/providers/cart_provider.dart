@@ -20,6 +20,17 @@ class CartProvider extends ChangeNotifier {
     updateInitialLoader(false);
   }
 
+  incrementTotalQuantityByIndex(index) {
+    orderList[index].add();
+    print(orderList[index]);
+    notifyListeners();
+  }
+
+  decrementTotalQuantityByIndex(index) {
+    orderList[index].remove();
+    notifyListeners();
+  }
+
   resetInitialLoader() {
     initialLoader = true;
   }
