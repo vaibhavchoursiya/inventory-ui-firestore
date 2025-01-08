@@ -8,8 +8,11 @@ import 'package:inventory_management_app/providers/home_provider.dart';
 import 'package:provider/provider.dart';
 
 class NavBarWidget extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
+  final scaffoldKey;
   const NavBarWidget({
     super.key,
+    this.scaffoldKey,
   });
 
   @override
@@ -21,12 +24,17 @@ class NavBarWidget extends StatelessWidget {
       children: [
         Row(
           children: [
-            Icon(
-              FontAwesomeIcons.bars,
-              color: Apptheme.dark.withOpacity(0.7),
+            IconButton(
+              onPressed: () {
+                scaffoldKey.currentState?.openDrawer();
+              },
+              icon: Icon(
+                FontAwesomeIcons.bars,
+                color: Apptheme.dark.withOpacity(0.7),
+              ),
             ),
             const SizedBox(
-              width: 18.0,
+              width: 3.0,
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

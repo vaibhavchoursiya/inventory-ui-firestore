@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/providers/home_provider.dart';
 import 'package:inventory_management_app/services/firebase_firestore_service.dart';
+import 'package:inventory_management_app/widgets/custom_drawer.dart';
 import 'package:inventory_management_app/widgets/hero_section.dart';
 import 'package:inventory_management_app/widgets/label_header_widget.dart';
 import 'package:inventory_management_app/widgets/navbar_widget.dart';
@@ -10,12 +11,21 @@ import 'package:inventory_management_app/widgets/product_view.dart';
 import 'package:inventory_management_app/widgets/search_filter_widget.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
+      drawer: customDrawer(context),
       backgroundColor: Apptheme.light,
       body: SafeArea(
         child: SingleChildScrollView(
@@ -23,7 +33,9 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.all(28.0),
             child: Column(
               children: [
-                const NavBarWidget(),
+                NavBarWidget(
+                  scaffoldKey: scaffoldKey,
+                ),
                 const SizedBox(
                   height: 25.0,
                 ),
