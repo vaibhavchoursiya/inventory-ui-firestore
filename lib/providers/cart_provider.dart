@@ -15,7 +15,7 @@ class CartProvider extends ChangeNotifier {
     orderList.clear();
     for (var id in ids) {
       final document = await FirebaseFirestoreService.getDocumentById(id);
-      orderList.add(OrderModel.fromJson(document));
+      orderList.add(OrderModel.fromJson(document, id));
     }
     updateInitialLoader(false);
   }

@@ -20,7 +20,7 @@ class FirebaseFirestoreService {
 
   static Future getDocumentById(String id) async {
     final document = await products.doc(id).get();
-    return document;
+    return document.data();
   }
 
   static Future<void> addProduct(ProductModel model) async {

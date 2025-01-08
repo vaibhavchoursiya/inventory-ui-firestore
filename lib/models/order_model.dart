@@ -12,9 +12,9 @@ class OrderModel {
       this.totalQuantity = 1,
       required this.price});
 
-  factory OrderModel.fromJson(Map model) {
+  factory OrderModel.fromJson(Map model, String id) {
     return OrderModel(
-        id: model["id"],
+        id: id,
         name: model["name"],
         description: model["description"],
         price: model["price"],
