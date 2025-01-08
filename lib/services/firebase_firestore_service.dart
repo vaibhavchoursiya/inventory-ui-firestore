@@ -15,4 +15,9 @@ class FirebaseFirestoreService {
     final finalData = snapshot.docs.map((doc) => doc.data()).toList();
     return finalData;
   }
+
+  static Future getDocumentById(String id) async {
+    final document = products.doc(id).get();
+    return document;
+  }
 }
