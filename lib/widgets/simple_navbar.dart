@@ -11,10 +11,14 @@ class SimpleNavBar extends StatelessWidget {
     super.key,
     required this.initialLoader,
     required this.processLoader,
+    required this.text,
+    this.doYouWantDeleteButton = true,
   });
 
   final bool initialLoader;
   final bool processLoader;
+  final String text;
+  final bool doYouWantDeleteButton;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class SimpleNavBar extends StatelessWidget {
               width: 10.0,
             ),
             Text(
-              "Your cart 🛍️",
+              text,
               style: GoogleFonts.aDLaMDisplay(
                 fontSize: 19.0,
                 color: Apptheme.dark.withOpacity(0.8),
@@ -49,13 +53,14 @@ class SimpleNavBar extends StatelessWidget {
             ),
           ],
         ),
-        IconButton(
-            onPressed: () {
-              context.read<HomeProvider>().removeAddToCarts();
-              context.read<CartProvider>().resetProvider();
-              context.pop();
-            },
-            icon: const Icon(Icons.delete))
+        if (doYouWantDeleteButton)
+          IconButton(
+              onPressed: () {
+                context.read<HomeProvider>().removeAddToCarts();
+                context.read<CartProvider>().resetProvider();
+                context.pop();
+              },
+              icon: const Icon(Icons.delete))
       ],
     );
   }

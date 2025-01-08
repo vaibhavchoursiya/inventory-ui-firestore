@@ -23,7 +23,10 @@ class ProductCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CardImageSection(),
+            CardImageSection(
+              imageUrl:
+                  context.read<HomeProvider>().productList[index].imageUrl,
+            ),
             CardBody(
               productModel: context.watch<HomeProvider>().productList[index],
             ),

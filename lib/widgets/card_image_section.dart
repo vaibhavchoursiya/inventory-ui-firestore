@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CardImageSection extends StatelessWidget {
+  final String imageUrl;
   const CardImageSection({
     super.key,
+    required this.imageUrl,
   });
 
   @override

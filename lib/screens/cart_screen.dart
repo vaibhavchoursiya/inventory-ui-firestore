@@ -94,6 +94,7 @@ class _CartScreenState extends State<CartScreen> {
                             SimpleNavBar(
                               initialLoader: initialLoader,
                               processLoader: processLoader,
+                              text: "Your cart 🛍️",
                             ),
                             const SizedBox(
                               height: 25.0,

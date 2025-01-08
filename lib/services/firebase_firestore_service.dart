@@ -23,8 +23,8 @@ class FirebaseFirestoreService {
     return document.data();
   }
 
-  static Future<void> addProduct(ProductModel model) async {
-    await products.add(model.toMap());
+  static Future<void> addProduct(data) async {
+    await products.add(data);
   }
 
   static Future<void> updateProductById(String id, data) async {

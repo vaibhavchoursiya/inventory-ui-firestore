@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:inventory_management_app/apptheme.dart';
 
 Widget customDrawer(BuildContext context) {
@@ -20,14 +21,15 @@ Widget customDrawer(BuildContext context) {
           leading: const Icon(Icons.home),
           title: const Text('Home'),
           onTap: () {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
         ListTile(
           leading: const Icon(Icons.settings),
           title: const Text('Add Products'),
           onTap: () {
-            Navigator.pop(context);
+            context.pop();
+            context.pushNamed("/add_product");
           },
         ),
       ],

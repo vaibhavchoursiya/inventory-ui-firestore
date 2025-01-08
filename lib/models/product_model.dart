@@ -1,5 +1,6 @@
 class ProductModel {
   final String id;
+  final String imageUrl;
   final String name;
   final String description;
   final int totalQuantity;
@@ -8,6 +9,7 @@ class ProductModel {
 
   ProductModel(
       {required this.id,
+      required this.imageUrl,
       required this.name,
       required this.description,
       required this.totalQuantity,
@@ -19,6 +21,7 @@ class ProductModel {
       "name": name,
       "description": description,
       "totalQuantity": totalQuantity,
+      "imageUrl": imageUrl,
       "price": price,
     };
   }
@@ -26,6 +29,8 @@ class ProductModel {
   factory ProductModel.fromJson(Map model, String id) {
     return ProductModel(
         id: id,
+        imageUrl: model["imageUrl"] ??
+            "https://www.katyayaniorganics.com/wp-content/uploads/2022/09/PROM.png",
         name: model["name"],
         description: model["description"],
         totalQuantity: model["totalQuantity"],
