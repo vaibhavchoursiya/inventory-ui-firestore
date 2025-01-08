@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/providers/cart_provider.dart';
 import 'package:inventory_management_app/widgets/cart_view.dart';
-import 'package:inventory_management_app/widgets/navbar_widget.dart';
+import 'package:inventory_management_app/widgets/shopping_form_widget.dart';
 import 'package:inventory_management_app/widgets/simple_navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +36,12 @@ class _CartScreenState extends State<CartScreen> {
         .select<CartProvider, bool>((provider) => provider.initialLoader);
     final totalPrice =
         context.select<CartProvider, double>((provider) => provider.totalPrice);
+    const border = OutlineInputBorder(
+      borderSide: BorderSide.none,
+      borderRadius: BorderRadius.all(
+        Radius.circular(6),
+      ),
+    );
 
     return PopScope(
       canPop: false,
@@ -90,47 +95,76 @@ class _CartScreenState extends State<CartScreen> {
                         const SizedBox(
                           height: 10.0,
                         ),
+                        TotolCostWidget(totalPrice: totalPrice),
+                        const SizedBox(
+                          height: 25.0,
+                        ),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Container(
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Apptheme.primary),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(5.0),
-                                  bottomLeft: Radius.circular(5.0),
-                                ),
-                              ),
-                              child: Text(
-                                "Totat",
-                                style: GoogleFonts.roboto(),
-                              ),
-                            ),
-                            Container(
-                              padding: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Apptheme.primary.withOpacity(0.7),
-                                border: Border.all(color: Apptheme.primary),
-                                borderRadius: const BorderRadius.only(
-                                  topRight: Radius.circular(5.0),
-                                  bottomRight: Radius.circular(5.0),
-                                ),
-                              ),
-                              child: Text(
-                                totalPrice.toStringAsFixed(2),
-                                style: GoogleFonts.aDLaMDisplay(
-                                    color: Apptheme.light),
+                            Text(
+                              "Form",
+                              style: GoogleFonts.roboto(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 18.0,
                               ),
                             ),
                           ],
                         ),
+                        const Divider(),
+                        const ShoppingFormWidget(border: border),
                       ],
                     ),
                   ),
                 ),
               ),
       ),
+    );
+  }
+}
+
+class TotolCostWidget extends StatelessWidget {
+  const TotolCostWidget({
+    super.key,
+    required this.totalPrice,
+  });
+
+  final double totalPrice;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            border: Border.all(color: Apptheme.primary),
+            borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(5.0),
+              bottomLeft: Radius.circular(5.0),
+            ),
+          ),
+          child: Text(
+            "Totat",
+            style: GoogleFonts.roboto(),
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Apptheme.primary.withOpacity(0.7),
+            border: Border.all(color: Apptheme.primary),
+            borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(5.0),
+              bottomRight: Radius.circular(5.0),
+            ),
+          ),
+          child: Text(
+            totalPrice.toStringAsFixed(2),
+            style: GoogleFonts.aDLaMDisplay(color: Apptheme.light),
+          ),
+        ),
+      ],
     );
   }
 }

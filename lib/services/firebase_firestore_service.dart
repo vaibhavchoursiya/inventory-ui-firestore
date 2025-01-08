@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_management_app/models/order_model.dart';
 import 'package:inventory_management_app/models/product_model.dart';
 
 class FirebaseFirestoreService {
@@ -39,18 +40,26 @@ class FirebaseFirestoreService {
     await products.doc(id).update(data);
   }
 
-  static Future<void> addOrder(List<ProductModel> items) async {
-    final batch = firestore.batch();
+  // {
+  //"orderList": [{}, {},{}],
+  //"clint name" : "",
+  //"clint contact": "",
+  //"total price": ""
+  // }
+  static Future<void> addOrder(List<OrderModel> items, String clientName,
+      String clientContactInfo, double totalPrice) async {
+    final data = {
+      "clientName": clientName,
+      "clientContactInfo": clientContactInfo,
+      "totalPrice": totalPrice
+    };
+    List orderList = [];
     for (var item in items) {
-      final docRef = products.doc();
-      batch.set(docRef, item);
+      orderList.add(item.toMap());
     }
+    data["orderList"] = orderList;
 
-    try {
-      await batch.commit();
-    } catch (e) {
-      debugPrint(e.toString());
-    }
+    await orders.add(data);
   }
 
   static Stream<QuerySnapshot> orderStream() {

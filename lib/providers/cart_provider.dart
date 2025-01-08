@@ -7,6 +7,9 @@ class CartProvider extends ChangeNotifier {
   List<OrderModel> orderList = [];
   double totalPrice = 0.0;
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController contactController = TextEditingController();
+
   updateInitialLoader(bool value) {
     initialLoader = value;
     notifyListeners();
@@ -43,6 +46,11 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
+  Future sendOrder() async {
+    await FirebaseFirestoreService.addOrder(
+        orderList, nameController.text, contactController.text, totalPrice);
+  }
+
   resetInitialLoader() {
     initialLoader = true;
   }
@@ -52,8 +60,14 @@ class CartProvider extends ChangeNotifier {
     totalPrice = 0.0;
   }
 
+  resetController() {
+    nameController.clear();
+    contactController.clear();
+  }
+
   resetProvider() {
     resetInitialLoader();
     resetOrderList();
+    resetController();
   }
 }

@@ -21,6 +21,16 @@ class OrderModel {
         totalQuantity: 1);
   }
 
+  toMap() {
+    return {
+      "id": id,
+      "name": name,
+      "description": description,
+      "price": price,
+      "totalQuantity": totalQuantity
+    };
+  }
+
   add() {
     totalQuantity += 1;
     return true;

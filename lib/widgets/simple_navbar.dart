@@ -3,7 +3,6 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/providers/cart_provider.dart';
-import 'package:inventory_management_app/widgets/product_view.dart';
 import 'package:provider/provider.dart';
 
 class SimpleNavBar extends StatelessWidget {
@@ -25,20 +24,20 @@ class SimpleNavBar extends StatelessWidget {
               context.pop();
             }
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_outlined,
-            color: Apptheme.dark,
+            color: Apptheme.dark.withOpacity(0.8),
+            size: 26.0,
           ),
         ),
         const SizedBox(
           width: 10.0,
         ),
         Text(
-          "Your cart",
+          "Your cart 🛍️",
           style: GoogleFonts.aDLaMDisplay(
             fontSize: 19.0,
-            fontWeight: FontWeight.w600,
-            color: Apptheme.dark,
+            color: Apptheme.dark.withOpacity(0.8),
             height: 1.2,
           ),
         ),
