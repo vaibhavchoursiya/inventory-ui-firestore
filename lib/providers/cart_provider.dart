@@ -19,4 +19,17 @@ class CartProvider extends ChangeNotifier {
     }
     updateInitialLoader(false);
   }
+
+  resetInitialLoader() {
+    initialLoader = true;
+  }
+
+  resetOrderList() {
+    orderList.clear();
+  }
+
+  resetProvider() {
+    resetInitialLoader();
+    resetOrderList();
+  }
 }
