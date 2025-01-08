@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:inventory_management_app/models/product_model.dart';
 
 class FirebaseFirestoreService {
@@ -36,5 +37,19 @@ class FirebaseFirestoreService {
     };
 
     await products.doc(id).update(data);
+  }
+
+  static Future<void> addOrder(List<ProductModel> items) async {
+    final batch = firestore.batch();
+    for (var item in items) {
+      final docRef = products.doc();
+      batch.set(docRef, item);
+    }
+
+    try {
+      await batch.commit();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }
