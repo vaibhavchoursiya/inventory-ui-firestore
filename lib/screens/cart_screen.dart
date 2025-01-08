@@ -35,6 +35,8 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     final initialLoader = context
         .select<CartProvider, bool>((provider) => provider.initialLoader);
+    final totalPrice =
+        context.select<CartProvider, double>((provider) => provider.totalPrice);
 
     return PopScope(
       canPop: false,
@@ -74,15 +76,57 @@ class _CartScreenState extends State<CartScreen> {
                 child: CircularProgressIndicator(),
               )
             : SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(28.0),
-                  child: Column(
-                    children: [
-                      SimpleNavBar(initialLoader: initialLoader),
-                      Expanded(
-                        child: CartView(),
-                      )
-                    ],
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(28.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SimpleNavBar(initialLoader: initialLoader),
+                        const SizedBox(
+                          height: 25.0,
+                        ),
+                        const CartView(),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Apptheme.primary),
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5.0),
+                                  bottomLeft: Radius.circular(5.0),
+                                ),
+                              ),
+                              child: Text(
+                                "Totat",
+                                style: GoogleFonts.roboto(),
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Apptheme.primary.withOpacity(0.7),
+                                border: Border.all(color: Apptheme.primary),
+                                borderRadius: const BorderRadius.only(
+                                  topRight: Radius.circular(5.0),
+                                  bottomRight: Radius.circular(5.0),
+                                ),
+                              ),
+                              child: Text(
+                                totalPrice.toStringAsFixed(2),
+                                style: GoogleFonts.aDLaMDisplay(
+                                    color: Apptheme.light),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

@@ -23,11 +23,14 @@ class OrderModel {
 
   add() {
     totalQuantity += 1;
+    return true;
   }
 
   remove() {
     if (totalQuantity > 1) {
       totalQuantity -= 1;
+      return true;
     }
+    return false;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/providers/cart_provider.dart';
 import 'package:inventory_management_app/widgets/quantity_button.dart';
 import 'package:provider/provider.dart';
@@ -21,13 +22,14 @@ class CartQuantityButtonsWidget extends StatelessWidget {
       child: Column(
         children: [
           QuantityButton(
+            color: Apptheme.primary,
             icon: FontAwesomeIcons.plus,
             tap: () {
               context.read<CartProvider>().incrementTotalQuantityByIndex(index);
             },
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5.0),
+            padding: const EdgeInsets.symmetric(vertical: 1.0),
             child: Text(
               "$totalQuantity",
               style: GoogleFonts.roboto(
@@ -37,6 +39,7 @@ class CartQuantityButtonsWidget extends StatelessWidget {
             ),
           ),
           QuantityButton(
+            color: Colors.redAccent,
             icon: FontAwesomeIcons.minus,
             tap: () {
               context.read<CartProvider>().decrementTotalQuantityByIndex(index);

@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
-import 'package:inventory_management_app/routes.dart';
 import 'package:inventory_management_app/widgets/card_icon_widget.dart';
 import 'package:inventory_management_app/providers/home_provider.dart';
 import 'package:provider/provider.dart';

@@ -10,12 +10,16 @@ class CartView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: context.read<CartProvider>().orderList.length,
         itemBuilder: (context, index) {
           final order = context.read<CartProvider>().orderList[index];
           return Card(
+            margin: const EdgeInsets.only(bottom: 18.0),
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
               child: Row(children: [
                 ClipRRect(
                   borderRadius: const BorderRadius.only(
