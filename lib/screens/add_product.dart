@@ -39,7 +39,7 @@ class AddProduct extends StatelessWidget {
                     const SizedBox(
                       height: 25.0,
                     ),
-                    AddProductForm(border: border)
+                    const AddProductForm(border: border)
                   ],
                 ),
               ),
