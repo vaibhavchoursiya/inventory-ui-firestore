@@ -17,7 +17,7 @@ class CardImageSection extends StatelessWidget {
             topRight: Radius.circular(6.0),
           ),
           child: Image.network(
-            "https://www.katyayaniorganics.com/wp-content/uploads/2022/09/PROM.png",
+            imageUrl,
             width: double.infinity,
             height: 150.0,
             fit: BoxFit.contain,
