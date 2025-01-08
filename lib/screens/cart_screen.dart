@@ -34,6 +34,8 @@ class _CartScreenState extends State<CartScreen> {
   Widget build(BuildContext context) {
     final initialLoader = context
         .select<CartProvider, bool>((provider) => provider.initialLoader);
+    final processLoader = context
+        .select<CartProvider, bool>((provider) => provider.processLoader);
     final totalPrice =
         context.select<CartProvider, double>((provider) => provider.totalPrice);
     const border = OutlineInputBorder(
@@ -49,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
         if (didPop) {
           return;
         }
-        if (!initialLoader) {
+        if (!initialLoader && !processLoader) {
           context.read<CartProvider>().resetProvider();
           context.pop();
         }
@@ -82,38 +84,53 @@ class _CartScreenState extends State<CartScreen> {
               )
             : SafeArea(
                 child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.all(28.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        SimpleNavBar(initialLoader: initialLoader),
-                        const SizedBox(
-                          height: 25.0,
-                        ),
-                        const CartView(),
-                        const SizedBox(
-                          height: 10.0,
-                        ),
-                        TotolCostWidget(totalPrice: totalPrice),
-                        const SizedBox(
-                          height: 25.0,
-                        ),
-                        Row(
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(28.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Text(
-                              "Form",
-                              style: GoogleFonts.roboto(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18.0,
-                              ),
+                            SimpleNavBar(
+                              initialLoader: initialLoader,
+                              processLoader: processLoader,
                             ),
+                            const SizedBox(
+                              height: 25.0,
+                            ),
+                            const CartView(),
+                            const SizedBox(
+                              height: 10.0,
+                            ),
+                            TotolCostWidget(totalPrice: totalPrice),
+                            const SizedBox(
+                              height: 25.0,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  "Form",
+                                  style: GoogleFonts.roboto(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18.0,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            const ShoppingFormWidget(border: border),
                           ],
                         ),
-                        const Divider(),
-                        const ShoppingFormWidget(border: border),
-                      ],
-                    ),
+                      ),
+                      if (processLoader) ...[
+                        const Positioned.fill(child: ModalBarrier()),
+                        const Positioned.fill(
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ),
+                      ]
+                    ],
                   ),
                 ),
               ),

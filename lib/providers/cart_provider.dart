@@ -4,6 +4,7 @@ import 'package:inventory_management_app/services/firebase_firestore_service.dar
 
 class CartProvider extends ChangeNotifier {
   bool initialLoader = true;
+  bool processLoader = false;
   List<OrderModel> orderList = [];
   double totalPrice = 0.0;
 
@@ -12,6 +13,11 @@ class CartProvider extends ChangeNotifier {
 
   updateInitialLoader(bool value) {
     initialLoader = value;
+    notifyListeners();
+  }
+
+  updateProcessLoader(bool value) {
+    processLoader = value;
     notifyListeners();
   }
 
@@ -47,8 +53,10 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future sendOrder() async {
-    await FirebaseFirestoreService.addOrder(
+    updateProcessLoader(true);
+    final res = await FirebaseFirestoreService.addOrder(
         orderList, nameController.text, contactController.text, totalPrice);
+    return res;
   }
 
   resetInitialLoader() {

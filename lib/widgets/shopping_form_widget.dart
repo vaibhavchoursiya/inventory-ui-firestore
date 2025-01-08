@@ -46,7 +46,15 @@ class _ShoppingFormWidgetState extends State<ShoppingFormWidget> {
               onPressed: () async {
                 if (formkey.currentState!.validate()) {
                   final cartProvider = context.read<CartProvider>();
-                  await cartProvider.sendOrder();
+                  final res = await cartProvider.sendOrder();
+                  if (res["status"] == "failed" && context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Sorry we don't have that much stock."),
+                      ),
+                    );
+                  }
+                  cartProvider.updateProcessLoader(false);
                 }
               },
               style: ElevatedButton.styleFrom(

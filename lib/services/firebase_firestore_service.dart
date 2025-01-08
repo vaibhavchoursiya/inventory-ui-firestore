@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:inventory_management_app/models/order_model.dart';
 import 'package:inventory_management_app/models/product_model.dart';
 
@@ -28,14 +27,14 @@ class FirebaseFirestoreService {
     await products.add(model.toMap());
   }
 
-  static Future<void> updateProductById(String id, ProductModel model) async {
-    final product = await getDocumentById(id);
-    final data = {
-      "name": model.name,
-      "description": model.description,
-      "totalQuantity": product["totalQuantity"] - model.totalQuantity,
-      "price": model.price
-    };
+  static Future<void> updateProductById(String id, data) async {
+    // final product = await getDocumentById(id);
+    // final data = {
+    //   "name": model.name,
+    //   "description": model.description,
+    //   "totalQuantity": product["totalQuantity"] - model.totalQuantity,
+    //   "price": model.price
+    // };
 
     await products.doc(id).update(data);
   }
@@ -46,7 +45,7 @@ class FirebaseFirestoreService {
   //"clint contact": "",
   //"total price": ""
   // }
-  static Future<void> addOrder(List<OrderModel> items, String clientName,
+  static Future addOrder(List<OrderModel> items, String clientName,
       String clientContactInfo, double totalPrice) async {
     final data = {
       "clientName": clientName,
@@ -55,11 +54,28 @@ class FirebaseFirestoreService {
     };
     List orderList = [];
     for (var item in items) {
-      orderList.add(item.toMap());
+      final existingProduct = await getDocumentById(item.id);
+
+      if (existingProduct["totalQuantity"] - item.totalQuantity < 0) {
+        return {"status": "failed"};
+      } else {
+        orderList.add(item.toMap());
+
+        final updatedProduct = {
+          "name": item.name,
+          "description": item.description,
+          "totalQuantity":
+              existingProduct["totalQuantity"] - item.totalQuantity,
+          "price": item.price,
+        };
+
+        await updateProductById(item.id, updatedProduct);
+      }
     }
     data["orderList"] = orderList;
 
     await orders.add(data);
+    return {"status": "success"};
   }
 
   static Stream<QuerySnapshot> orderStream() {

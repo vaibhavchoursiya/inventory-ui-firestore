@@ -9,9 +9,11 @@ class SimpleNavBar extends StatelessWidget {
   const SimpleNavBar({
     super.key,
     required this.initialLoader,
+    required this.processLoader,
   });
 
   final bool initialLoader;
+  final bool processLoader;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class SimpleNavBar extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {
-            if (!initialLoader) {
+            if (!initialLoader && !processLoader) {
               context.read<CartProvider>().resetProvider();
               context.pop();
             }
