@@ -23,7 +23,7 @@ class MTextFormFieldColumn extends StatelessWidget {
         TextFormField(
           style: const TextStyle(
             fontFamily: "Poppins",
-            fontWeight: FontWeight.w300,
+            fontWeight: FontWeight.w600,
           ),
           // minLines: 6,
           controller: controller,
@@ -34,10 +34,11 @@ class MTextFormFieldColumn extends StatelessWidget {
           cursorErrorColor: Apptheme.primary,
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: const TextStyle(
+            hintStyle: TextStyle(
               fontFamily: "Poppins",
               fontSize: 16,
               // color: Apptheme.grey,
+              color: Apptheme.dark.withOpacity(0.5),
               fontWeight: FontWeight.w500,
             ),
             enabledBorder: border,

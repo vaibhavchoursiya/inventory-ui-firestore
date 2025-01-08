@@ -40,7 +40,7 @@ class _ShoppingFormWidgetState extends State<ShoppingFormWidget> {
           ),
           SizedBox(
             width: double.infinity,
-            height: 45.0,
+            height: 50.0,
             child: ElevatedButton.icon(
               icon: const Icon(Icons.send),
               onPressed: () async {
@@ -52,6 +52,9 @@ class _ShoppingFormWidgetState extends State<ShoppingFormWidget> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.indigoAccent,
                 foregroundColor: Apptheme.light,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
               ),
               label: Text(
                 "Send Order",
