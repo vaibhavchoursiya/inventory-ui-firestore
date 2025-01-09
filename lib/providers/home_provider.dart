@@ -58,6 +58,7 @@ class HomeProvider extends ChangeNotifier {
   resetAddToCartList() {
     addToCartList.clear();
     addToCartListLength = 0;
+    notifyListeners();
   }
 
   resetProductList() {

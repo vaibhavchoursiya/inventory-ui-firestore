@@ -25,7 +25,7 @@ class ProductCard extends StatelessWidget {
           children: [
             CardImageSection(
               imageUrl:
-                  context.read<HomeProvider>().productList[index].imageUrl,
+                  context.watch<HomeProvider>().productList[index].imageUrl,
             ),
             CardBody(
               productModel: context.watch<HomeProvider>().productList[index],

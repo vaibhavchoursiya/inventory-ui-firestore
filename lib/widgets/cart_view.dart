@@ -27,7 +27,7 @@ class CartView extends StatelessWidget {
                     topRight: Radius.circular(6.0),
                   ),
                   child: Image.network(
-                    "https://www.katyayaniorganics.com/wp-content/uploads/2022/09/PROM.png",
+                    order.imageUrl,
                     width: 80,
                     height: 80.0,
                     fit: BoxFit.contain,

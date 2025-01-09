@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_management_app/apptheme.dart';
 import 'package:inventory_management_app/providers/cart_provider.dart';
+import 'package:inventory_management_app/providers/home_provider.dart';
 import 'package:inventory_management_app/utilites/validators.dart';
 import 'package:inventory_management_app/widgets/mtext_form_field.dart';
+import 'package:inventory_management_app/widgets/navbar_widget.dart';
 import 'package:provider/provider.dart';
 
 class ShoppingFormWidget extends StatefulWidget {
@@ -46,15 +49,21 @@ class _ShoppingFormWidgetState extends State<ShoppingFormWidget> {
               onPressed: () async {
                 if (formkey.currentState!.validate()) {
                   final cartProvider = context.read<CartProvider>();
+                  final homeProvider = context.read<HomeProvider>();
                   final res = await cartProvider.sendOrder();
-                  if (res["status"] == "failed" && context.mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Sorry we don't have that much stock."),
-                      ),
-                    );
+                  if (context.mounted) {
+                    if (res["status"] == "failed") {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Sorry we don't have that much stock."),
+                        ),
+                      );
+                    }
+                    cartProvider.resetProvider();
+                    homeProvider.resetAddToCartList();
+                    cartProvider.updateProcessLoader(false);
+                    context.pop();
                   }
-                  cartProvider.updateProcessLoader(false);
                 }
               },
               style: ElevatedButton.styleFrom(
